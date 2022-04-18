@@ -19402,17 +19402,36 @@ axios.get('http://127.0.0.1:8000/api/v1/attendances').then(function (response) {
 })["catch"](function (error) {
   console.log(error);
 });
+var dynamicTable;
 axios.get('http://127.0.0.1:8000/api/v1/weekly?date=20-12-05').then(function (response) {
   var dataSet = response.data.result;
-  console.log(dataSet.columns);
   $(document).ready(function () {
-    $('#myTable2').DataTable({
+    dynamicTable = $('#myTable2').DataTable({
       data: dataSet.body,
       columns: dataSet.columns
     });
   });
 })["catch"](function (error) {
   console.log(error);
+});
+var dateInput = document.getElementById("dateInput");
+dateInput.addEventListener('change', function () {
+  dynamicTable.destroy();
+  axios.get('http://127.0.0.1:8000/api/v1/weekly', {
+    params: {
+      date: dateInput.value
+    }
+  }).then(function (response) {
+    var dataSet = response.data.result;
+    $(document).ready(function () {
+      dynamicTable = $('#myTable2').DataTable({
+        data: dataSet.body,
+        columns: dataSet.columns
+      });
+    });
+  })["catch"](function (error) {
+    console.log(error);
+  });
 });
 
 /***/ }),

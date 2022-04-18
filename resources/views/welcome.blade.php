@@ -80,7 +80,10 @@
             </table>
         </div>
         
-        <div style="width: 80%; margin: 50px auto; border: 1px solid black; padding: 20px">
+        <div style="width: 80%; margin: 50px auto 0; text-align: right;">
+            <input id="dateInput" type="date" value="2020-12-05">
+        </div>
+        <div style="width: 80%; margin: 10px auto; border: 1px solid black; padding: 20px">
             <h2>Tabella presenze settimanali</h2>
             <table id="myTable2">
             </table>
