@@ -114,9 +114,9 @@ class AttendanceController extends Controller
 
                     foreach ($attendances as $key => $attendance) {
                         if ($key === 0 && !$attendance->verso) {
-                            $this_day->add(date_diff(date_sub(date_create($day), new DateInterval('PT24H')), date_create($attendance->dataora)));
+                            $this_day->add(date_diff(date_create($attendance->dataora), date_sub(date_create($day), new DateInterval('PT24H'))));
                         } else if ($key === count($attendances) - 1 && $attendance->verso) {
-                            $this_day->add(date_diff(date_create($attendance->dataora), date_add(date_create($day), new DateInterval('PT24H'))));
+                            $this_day->add(date_diff(date_add(date_create($day), new DateInterval('PT24H')), date_create($attendance->dataora)));
                         } else {
                             if ($attendance->verso) {
                                 $tmp_date = $attendance->dataora;
